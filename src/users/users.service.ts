@@ -25,7 +25,7 @@ export class UsersService {
     return this.usersRepository
       .createQueryBuilder('user')
       .select(
-        '(SELECT COUNT(*) FROM `user` WHERE DATEDIFF(lastActivityDate, registrationDate) > 7) / (SELECT COUNT(*) FROM `user` WHERE DATEDIFF(NOW(), registrationDate) > 7)',
+        '(SELECT COUNT(*) FROM `user` WHERE DATEDIFF(lastActivityDate, registrationDate) >= 7) / (SELECT COUNT(*) FROM `user` WHERE DATEDIFF(NOW(), registrationDate) >= 7)',
         'rollingRetention',
       )
       .getRawOne()
